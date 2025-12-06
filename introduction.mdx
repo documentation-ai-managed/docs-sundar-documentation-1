@@ -1,0 +1,108 @@
+---
+title: Introduction
+description: Overview of Front, a customer experience platform designed to deliver outstanding service through automation and insights
+---
+
+## Welcome to Front
+
+Front empowers businesses to prioritize customer satisfaction by automating routine tasks and providing reliable insights into customer interactions. You can streamline support workflows, integrate seamlessly with existing tools, and gain actionable data to improve service quality.
+
+Front offers powerful features like automated ticket routing, real-time analytics, and customizable workflows that help teams respond faster and more effectively.
+
+<Columns cols={3}>
+  <Card title="Automated Routing" icon="arrow-right" href="#automated-routing">
+    Route customer inquiries automatically based on rules and priorities.
+  </Card>
+  <Card title="Real-Time Analytics" icon="bar-chart" href="#analytics">
+    Monitor performance metrics and customer satisfaction in real-time.
+  </Card>
+  <Card title="Seamless Integrations" icon="link" href="#integrations">
+    Connect with your favorite tools for unified customer experiences.
+  </Card>
+</Columns>
+
+## Key Benefits
+
+Front helps businesses deliver exceptional customer service by reducing response times and increasing efficiency. With automation at its core, you can focus on building relationships rather than managing repetitive tasks.
+
+<Tabs>
+  <Tab title="Support Teams" icon="users">
+    Enable support teams to handle more tickets without compromising quality. Front's automation ensures that urgent issues are prioritized and assigned to the right agents.
+  </Tab>
+  <Tab title="Customer Success" icon="heart">
+    Track customer interactions and satisfaction scores to identify opportunities for improvement. Use insights to proactively address concerns.
+  </Tab>
+  <Tab title="Operations" icon="settings">
+    Integrate Front with CRM systems, helpdesk tools, and communication platforms to create a unified workflow. Reduce manual data entry and errors.
+  </Tab>
+</Tabs>
+
+## Getting Started
+
+To begin using Front, create an account and configure your initial settings. You can import existing customer data and set up automation rules within minutes.
+
+<Steps>
+  <Step title="Sign Up" icon="user-plus">
+    Visit the Front dashboard and create a new account using your business email.
+  </Step>
+  <Step title="Configure Settings" icon="settings">
+    Set up your team, define routing rules, and integrate with your existing tools.
+  </Step>
+  <Step title="Import Data" icon="upload">
+    Import customer data and historical tickets to get started quickly.
+  </Step>
+  <Step title="Test Automation" icon="play">
+    Run test scenarios to ensure your automation rules work as expected.
+  </Step>
+</Steps>
+
+## Advanced Features
+
+Front goes beyond basic ticketing with advanced features like predictive analytics and multi-channel support. You can handle conversations across email, chat, and social media from a single interface.
+
+<Expandable title="Learn More About Predictive Analytics" default-open="false">
+  Predictive analytics uses machine learning to forecast customer needs and potential issues. This helps you address problems before they escalate, improving overall satisfaction.
+</Expandable>
+
+<ExpandableGroup>
+  <Expandable title="Multi-Channel Support" default-open="false">
+    Support customers across email, live chat, and social media channels without switching between tools.
+  </Expandable>
+  <Expandable title="Custom Workflows" default-open="false">
+    Build custom workflows to automate complex processes, such as escalation procedures or follow-up tasks.
+  </Expandable>
+</ExpandableGroup>
+
+## Code Example
+
+Here is a simple example of how to integrate Front's API for ticket creation:
+
+```javascript
+const axios = require('axios');
+
+async function createTicket(customerId, message) {
+  try {
+    const response = await axios.post('https://api.front.com/tickets', {
+      customer_id: customerId,
+      message: message,
+      priority: 'high'
+    }, {
+      headers: {
+        'Authorization': `Bearer ${process.env.FRONT_API_KEY}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    console.log('Ticket created:', response.data);
+  } catch (error) {
+    console.error('Error creating ticket:', error.response.data);
+  }
+}
+
+createTicket('12345', 'Customer reported an issue with the product.');
+```
+
+<Callout kind="info">Always store your API key securely and never expose it in client-side code.</Callout>
+
+This introduction covers the basics of Front and its capabilities. Explore the documentation to learn more about specific features and integrations.
+
+With Front, you can transform your customer experience operations and deliver service that customers truly appreciate. Start your journey today and see the difference automation and insights can make.

@@ -1,0 +1,132 @@
+---
+title: Integrations
+description: Connect Front with your existing tools and platforms for seamless customer experience workflows
+---
+
+## Integrations Overview
+
+Front integrates with popular business tools to create unified workflows that enhance customer experiences. Connect your CRM, helpdesk, and communication platforms to streamline operations.
+
+<Callout kind="success">Front's open API and pre-built integrations make it easy to connect with over 100 tools.</Callout>
+
+## Setting Up Integrations
+
+Access the integrations marketplace in your Front dashboard to browse and configure connections. Most integrations require only a few clicks to activate.
+
+<Steps>
+  <Step title="Browse Marketplace" icon="search">
+    Visit the integrations section and explore available tools.
+  </Step>
+  <Step title="Authorize Access" icon="key">
+    Grant Front permission to access the external service using OAuth.
+  </Step>
+  <Step title="Configure Settings" icon="settings">
+    Customize the integration behavior, such as data mapping and sync frequency.
+  </Step>
+  <Step title="Test Connection" icon="play">
+    Run a test to ensure data flows correctly between systems.
+  </Step>
+</Steps>
+
+## Popular Integrations
+
+Front connects with industry-leading tools to extend your customer experience capabilities.
+
+<Columns cols={3}>
+  <Card title="Salesforce CRM" icon="cloud" href="#salesforce">
+    Sync customer data and tickets for unified sales and support.
+  </Card>
+  <Card title="Slack" icon="message-square" href="#slack">
+    Receive notifications and manage tickets directly in Slack.
+  </Card>
+  <Card title="Zendesk" icon="headphones" href="#zendesk">
+    Migrate existing tickets and maintain continuity.
+  </Card>
+</Columns>
+
+## CRM Integration
+
+Integrate with CRM systems to keep customer profiles up-to-date and provide context for support interactions.
+
+<Tabs>
+  <Tab title="Data Sync" icon="refresh-cw">
+    Automatically sync customer information between Front and your CRM.
+  </Tab>
+  <Tab title="Ticket Creation" icon="plus">
+    Create CRM records from Front tickets and vice versa.
+  </Tab>
+  <Tab title="Contact Enrichment" icon="user">
+    Pull additional customer details from CRM into Front conversations.
+  </Tab>
+</Tabs>
+
+## Communication Tools
+
+Connect messaging platforms to handle customer inquiries across multiple channels from a single interface.
+
+<Expandable title="Slack Integration" default-open="false">
+  Get notified of new tickets in Slack channels and respond directly from the app.
+</Expandable>
+
+<ExpandableGroup>
+  <Expandable title="Microsoft Teams" default-open="false">
+    Integrate with Teams for unified communication and ticket management.
+  </Expandable>
+  <Expandable title="Twilio" default-open="false">
+    Handle SMS and voice interactions alongside email and chat.
+  </Expandable>
+</ExpandableGroup>
+
+## Custom API Integrations
+
+Build custom integrations using Front's REST API for specialized workflows that pre-built connectors don't cover.
+
+<CodeGroup tabs="JavaScript,Python">
+  ```javascript
+const axios = require('axios');
+
+async function syncToCustomCRM(ticketData) {
+  const response = await axios.post('https://your-crm.com/api/tickets', {
+    title: ticketData.subject,
+    description: ticketData.body,
+    customer_id: ticketData.customer.id
+  }, {
+    headers: {
+      'Authorization': `Bearer ${process.env.CRM_API_KEY}`
+    }
+  });
+  return response.data;
+}
+
+// Call this function when a new ticket is created in Front
+  ```
+  ```python
+import requests
+
+def sync_to_custom_crm(ticket_data):
+    payload = {
+        'title': ticket_data['subject'],
+        'description': ticket_data['body'],
+        'customer_id': ticket_data['customer']['id']
+    }
+    headers = {'Authorization': f'Bearer {os.environ["CRM_API_KEY"]}'}
+    response = requests.post('https://your-crm.com/api/tickets', json=payload, headers=headers)
+    return response.json()
+
+# Trigger on new Front ticket events
+  ```
+</CodeGroup>
+
+<Callout kind="tip">Use webhooks in combination with custom integrations for real-time data synchronization.</Callout>
+
+## Best Practices
+
+Follow these guidelines to ensure smooth integrations:
+
+- Test integrations in a development environment before production deployment.
+- Monitor API usage and implement error handling for reliability.
+- Keep integration credentials secure and rotate them periodically.
+
+This page explores the integration capabilities of Front, helping you connect with the tools your team already uses. Build a cohesive customer experience ecosystem that works seamlessly across platforms.
+
+With proper integrations in place, Front becomes the central hub for all your customer interactions, improving efficiency and satisfaction.

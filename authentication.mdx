@@ -1,0 +1,106 @@
+---
+title: Authentication
+description: Learn how to authenticate with Front's API and manage access securely
+---
+
+## Authentication Overview
+
+Front uses API keys for authentication to ensure secure access to your customer data and platform features. You must include a valid API key in the authorization header of all API requests.
+
+<Callout kind="alert">Keep your API keys confidential and rotate them regularly to maintain security.</Callout>
+
+## Obtaining an API Key
+
+To get started with authentication, generate an API key from the Front dashboard. Navigate to the settings section and create a new key with the appropriate permissions.
+
+<Steps>
+  <Step title="Access Dashboard" icon="settings">
+    Log in to your Front account and go to the API settings page.
+  </Step>
+  <Step title="Generate Key" icon="key">
+    Click 'Generate New Key' and select the scopes you need, such as read and write access.
+  </Step>
+  <Step title="Secure Storage" icon="lock">
+    Store the key securely in your environment variables or a key management service.
+  </Step>
+</Steps>
+
+## Using API Keys
+
+Include the API key in the Authorization header of your requests. Use the Bearer token format for all API calls.
+
+<CodeGroup tabs="JavaScript,Python,cURL">
+  ```javascript
+const axios = require('axios');
+
+const response = await axios.get('https://api.front.com/customers', {
+  headers: {
+    'Authorization': `Bearer ${process.env.FRONT_API_KEY}`
+  }
+});
+console.log(response.data);
+  ```
+  ```python
+import requests
+
+headers = {
+  'Authorization': f'Bearer {os.environ["FRONT_API_KEY"]}'
+}
+response = requests.get('https://api.front.com/customers', headers=headers)
+print(response.json())
+  ```
+  ```bash
+curl -H "Authorization: Bearer $FRONT_API_KEY" \
+  https://api.front.com/customers
+  ```
+</CodeGroup>
+
+## OAuth Integration
+
+For more advanced integrations, Front supports OAuth 2.0 for delegated access. This allows third-party applications to act on behalf of users without storing credentials.
+
+<Tabs>
+  <Tab title="Client Credentials" icon="shield">
+    Use client credentials flow for server-to-server authentication where no user interaction is needed.
+  </Tab>
+  <Tab title="Authorization Code" icon="user">
+    Implement authorization code flow for web applications that require user consent.
+  </Tab>
+</Tabs>
+
+## Managing Permissions
+
+Control access levels by assigning specific permissions to each API key. Front offers granular permissions for different operations like reading tickets or updating customer information.
+
+<Expandable title="Permission Types" default-open="false">
+  - **Read**: Access to view customer data and tickets.
+  - **Write**: Ability to create and update records.
+  - **Admin**: Full access including user management and settings.
+</Expandable>
+
+<ExpandableGroup>
+  <Expandable title="Best Practices" default-open="false">
+    Regularly audit API key usage and revoke keys that are no longer needed.
+  </Expandable>
+  <Expandable title="Rate Limiting" default-open="false">
+    Be aware of API rate limits and implement retry logic in your applications.
+  </Expandable>
+</ExpandableGroup>
+
+## Troubleshooting Authentication Issues
+
+If you encounter authentication errors, check the following common issues:
+
+- Ensure the API key is correctly formatted and not expired.
+- Verify that the key has the required permissions for the operation.
+- Confirm that HTTPS is used for all requests to protect the key in transit.
+
+<Callout kind="tip">Use environment variables to manage API keys in your applications and avoid hardcoding them.</Callout>
+
+## Security Considerations
+
+Front takes security seriously. All API communications are encrypted, and keys can be rotated without downtime. Implement additional security measures like IP whitelisting for sensitive operations.
+
+This page provides a comprehensive guide to authenticating with Front's API. Follow these practices to ensure secure and reliable access to your customer experience platform.
+
+With proper authentication in place, you can confidently integrate Front into your workflows and leverage its full potential for improving customer satisfaction.

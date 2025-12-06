@@ -1,0 +1,123 @@
+---
+title: Webhooks
+description: Set up webhooks to receive real-time notifications from Front about customer interactions and events
+---
+
+## Webhooks Overview
+
+Webhooks allow Front to send real-time notifications to your application when specific events occur, such as new ticket creation or customer updates. This enables you to build responsive integrations that react instantly to changes.
+
+<Callout kind="info">Webhooks use HTTP POST requests to deliver event data in JSON format to your specified endpoint.</Callout>
+
+## Setting Up Webhooks
+
+Configure webhooks in the Front dashboard to start receiving notifications. Define the events you want to monitor and the endpoint URL where data should be sent.
+
+<Steps>
+  <Step title="Access Settings" icon="settings">
+    Go to the webhooks section in your Front dashboard.
+  </Step>
+  <Step title="Create Webhook" icon="plus">
+    Click 'Add Webhook' and enter your endpoint URL.
+  </Step>
+  <Step title="Select Events" icon="bell">
+    Choose the events to trigger notifications, like ticket updates or customer replies.
+  </Step>
+  <Step title="Test Integration" icon="play">
+    Send a test event to verify your endpoint receives and processes the data correctly.
+  </Step>
+</Steps>
+
+## Event Types
+
+Front supports various event types that trigger webhook notifications. Each event includes relevant data about the change.
+
+<Tabs>
+  <Tab title="Ticket Events" icon="file-text">
+    Notifications for ticket creation, updates, and closures.
+  </Tab>
+  <Tab title="Customer Events" icon="user">
+    Alerts for new customers or profile changes.
+  </Tab>
+  <Tab title="Conversation Events" icon="message-square">
+    Updates on ongoing customer conversations.
+  </Tab>
+</Tabs>
+
+## Handling Webhook Payloads
+
+Webhook payloads contain JSON data with event details. Process this data in your application to take appropriate actions.
+
+<CodeGroup tabs="JavaScript,Python">
+  ```javascript
+const express = require('express');
+const app = express();
+
+app.post('/webhook', express.json(), (req, res) => {
+  const event = req.body;
+  console.log('Received event:', event.type);
+  
+  if (event.type === 'ticket.created') {
+    // Handle new ticket
+    assignToAgent(event.ticket.id);
+  }
+  
+  res.sendStatus(200);
+});
+
+app.listen(3000, () => console.log('Webhook server running'));
+  ```
+  ```python
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route('/webhook', methods=['POST'])
+def handle_webhook():
+    event = request.json
+    print(f'Received event: {event["type"]}')
+    
+    if event['type'] == 'ticket.created':
+        assign_to_agent(event['ticket']['id'])
+    
+    return jsonify({'status': 'ok'}), 200
+
+if __name__ == '__main__':
+    app.run(port=3000)
+  ```
+</CodeGroup>
+
+## Security and Verification
+
+Verify webhook authenticity by checking the signature included in the request headers. Front signs payloads to ensure they come from a trusted source.
+
+<Expandable title="Signature Verification" default-open="false">
+  Use the shared secret from your webhook settings to verify the HMAC signature of incoming requests.
+</Expandable>
+
+<ExpandableGroup>
+  <Expandable title="Retry Logic" default-open="false">
+    Implement retry handling for failed webhook deliveries to ensure no events are missed.
+  </Expandable>
+  <Expandable title="Rate Limiting" default-open="false">
+    Be prepared for high-volume events during peak times and implement appropriate rate limiting.
+  </Expandable>
+</ExpandableGroup>
+
+## Common Use Cases
+
+Webhooks enable powerful integrations that respond to customer interactions in real-time.
+
+- Automatically assign tickets to available agents based on priority.
+- Update external CRM systems when customer information changes.
+- Send notifications to team channels for urgent issues.
+
+<Callout kind="tip">Test your webhook integrations thoroughly with sample data before deploying to production.</Callout>
+
+## Troubleshooting
+
+If webhooks are not delivering, check your endpoint accessibility and ensure it responds with a 200 status code within 10 seconds.
+
+This comprehensive guide to webhooks helps you build dynamic integrations with Front. Leverage real-time notifications to create more responsive customer experiences.
+
+With webhooks configured, your applications can react instantly to customer events, enhancing the overall efficiency of your customer support operations.
